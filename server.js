@@ -8,7 +8,8 @@ var http     = require('http'),
     logger   = require('./lib/logger'),
     config   = require('./lib/config'),
     chromecast = require('./lib/chromecast'),
-    monitor    = require('./lib/monitor');
+    monitor    = require('./lib/monitor'),
+    poll     = require('./lib/poll');
 
 var app = require('./lib/express'),
     server = http.createServer(app),
@@ -63,6 +64,7 @@ db
       chromecast();
     }
     monitor.start();
+    poll.start();
     server.listen(config.get('port'), function() {
       logger.info('Express server listening on port %d in %s mode',
                   config.get('port'),
